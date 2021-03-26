@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
       telegram_crossposting(@message.content)
       redirect_to root_path
     else
-      render root_path
+      render new_message_path, object: @message
     end
     
   end

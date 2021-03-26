@@ -1,4 +1,3 @@
- <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"btn btn-primary"%>
 <div class="container">
   <h2 class="text-center">Covid cases in <%= @results[0]['Country'] %> on the last <%= @results[1] %> days </h2>
 </div>
@@ -26,7 +25,10 @@
   <div class="row center">
     <div class="col-xs-12">
       <h2 class="py-4">My messages</h2>
-      <%= link_to 'Agregar Tweet', new_message_path, remote: true, class: "btn btn-primary"  %>
+      <div class="container d-flex">
+        <%= link_to 'Agregar Tweet', new_message_path, remote: true, class: "btn btn-primary mr-5"  %>
+        <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"btn btn-primary"%>
+      </div>
       <% @messages.each do |message| %>
         <div class="message-container pt-4" id="message-<%= message.id %>">
           <i class="author">
@@ -40,9 +42,6 @@
     </div>
   </div> 
 </div>
-<!-- Button trigger modal -->
-
-
 
 <!-- Modal -->
 <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
