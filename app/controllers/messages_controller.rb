@@ -1,8 +1,12 @@
-class MessagesController < ApplicationController
+require 'json'
+require 'open-uri'
 
+class MessagesController < ApplicationController
+  before_action :covid_data
   def index
     @messages = Message.all
     @message = Message.new
+    @results = covid_data
   end
 
   def create
@@ -15,8 +19,14 @@ class MessagesController < ApplicationController
     end
   end
 
-  private
+  def covid_data
+    url = 'https://api.covid19api.com/dayone/country/argentina'
+    response = open(url).read
+    data_array = JSON.parse(response)
 
+  [data_array[-1], data_array.length ]
+  end
+  private
   def message_params
     params.require(:message).permit(:content)
   end

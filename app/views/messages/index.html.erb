@@ -1,23 +1,26 @@
 <div class="container">
-<h2>My messages</h2>
-</div>
+  <div class="row center">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+      <h2 class="pb-4">My messages</h2>
+      <%= link_to 'Agregar Tweet', new_message_path, remote: true, class: "btn btn-primary"  %>
+      <% @messages.each do |message| %>
+        <div class="message-container pt-4" id="message-<%= message.id %>">
+          <i class="author">
+            <span><%= message.user.email %></span>
+            <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
+          </i>
+          <p><%= message.content %></p>
+        </div>
+      <% end %>
 
-<div class="container">
-  <% @messages.each do |message| %>
-    <div class="message-container" id="message-<%= message.id %>">
-      <i class="author">
-        <span><%= message.user.email %></span>
-        <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
-      </i>
-      <p><%= message.content %></p>
     </div>
-  <% end %>
+  </div> 
 </div>
-
-<!-- Button trigger modal -->
 <div class="container">
-  <%= link_to 'Agregar Tweet', new_message_path, remote: true, class: "btn btn-primary"  %>
+  <%= @results %>
 </div>
+<!-- Button trigger modal -->
+
 
 
 <!-- Modal -->
@@ -25,7 +28,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add your Message</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
