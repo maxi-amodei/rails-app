@@ -1,7 +1,30 @@
 <div class="container">
+  <h2 class="text-center">Covid cases in <%= @results[0]['Country'] %> on the last <%= @results[1] %> days </h2>
+</div>
+<div class="container my-4 w-50 justify-content-center">
+  <div class="row align-items-start individual-cards">
+    <div class="col border rounded-top-custom mr-2 d-flex flex-column">
+      <p class="card-text text-left mb-0"><strong>Confirmed</strong></p>
+      <p> <i class="fas fa-check-circle"></i> <%= number_with_delimiter(@results[0]['Confirmed'], :delimiter => ',') %> cases</p>
+    </div>
+    <div class="col border rounded-top-custom mr-2 d-flex flex-column">
+      <p class="card-text text-left mb-0"><strong>Deaths</strong></p>
+      <p> <i class="fas fa-check-circle"></i> <%= number_with_delimiter(@results[0]['Deaths'], :delimiter => ',') %> cases</p>
+    </div>
+    <div class="col border rounded-top-custom mr-2 d-flex flex-column">
+      <p class="card-text text-left mb-0"><strong>Recovered</strong></p>
+      <p> <i class="fas fa-check-circle"></i> <%= number_with_delimiter(@results[0]['Recovered'], :delimiter => ',') %> cases</p>
+    </div>
+    <div class="col border rounded-top-custom mr-2 d-flex flex-column">
+      <p class="card-text text-left mb-0"><strong>Active</strong></p>
+      <p> <i class="fas fa-check-circle"></i> <%= number_with_delimiter(@results[0]['Active'], :delimiter => ',') %> cases</p>
+  </div>
+</div>
+
+<div class="container">
   <div class="row center">
-    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-      <h2 class="pb-4">My messages</h2>
+    <div class="col-xs-12">
+      <h2 class="py-4">My messages</h2>
       <%= link_to 'Agregar Tweet', new_message_path, remote: true, class: "btn btn-primary"  %>
       <% @messages.each do |message| %>
         <div class="message-container pt-4" id="message-<%= message.id %>">
@@ -15,9 +38,6 @@
 
     </div>
   </div> 
-</div>
-<div class="container">
-  <%= @results %>
 </div>
 <!-- Button trigger modal -->
 
