@@ -1,3 +1,4 @@
+ <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"btn btn-primary"%>
 <div class="container">
   <h2 class="text-center">Covid cases in <%= @results[0]['Country'] %> on the last <%= @results[1] %> days </h2>
 </div>

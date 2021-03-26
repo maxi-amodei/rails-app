@@ -60,3 +60,6 @@ gem 'devise'
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
 gem 'simple_form'
+
+#Telegram Bot
+gem 'telegram-bot-ruby'
