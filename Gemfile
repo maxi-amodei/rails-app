@@ -63,3 +63,6 @@ gem 'simple_form'
 
 #Telegram Bot
 gem 'telegram-bot-ruby'
+
+#Rest-client gem
+gem 'rest-client'

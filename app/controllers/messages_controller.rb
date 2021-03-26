@@ -1,6 +1,6 @@
 require 'json'
 require 'open-uri'
-require 'telegram/bot'
+require 'rest-client'
 
 class MessagesController < ApplicationController
   
@@ -14,8 +14,8 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user = current_user
     if @message.save
+      telegram_crossposting(@message.content)
       redirect_to root_path
-      telegram_crossposting(message)
     else
       render root_path
     end
@@ -31,14 +31,12 @@ class MessagesController < ApplicationController
 
   def telegram_crossposting(message)
     token = '1703817387:AAFqPLRSdbTH-9aXn1PsKikBlWDebW9q91Q'
-    Telegram::Bot::Client.run(token) do |bot|
-      bot.listen do |message|
-        case message.text
-        when '/sitepoint'
-          bot.api.send_message(chat_id: message.chat.id, text: "#{hello}")
-        end
-      end
-    end
+    response = RestClient::Request.new(
+      :method => :post,
+      :url => "https://api.telegram.org/bot#{token}/sendMessage",
+      :payload => {"chat_id": "-1001359045591", "text": "#{message}", "disable_notification": true}
+    ).execute
+    flash[:notice] =  "Message published in Telegram!"
   end
 
   private
