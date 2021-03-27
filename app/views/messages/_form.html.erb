@@ -1,4 +1,4 @@
-<%= simple_form_for @message, remote: true do |f| %>
-    <%= f.input :content, label: false, placeholder: "Type your message (max 400 chars)" %>
+<%= simple_form_for @message do |f| %>
+    <%= f.input :content, label: false, errors:"Too long", placeholder: "Type your message (max 400 chars)" %>
     <%= f.submit "Publish tweet", class: "btn btn-primary" %>
   <% end %>

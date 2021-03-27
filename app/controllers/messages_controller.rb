@@ -10,6 +10,10 @@ class MessagesController < ApplicationController
     @results = covid_data
   end
 
+  def new
+    @message = Message.new
+  end
+
   def create
     @message = Message.new(message_params)
     @message.user = current_user
@@ -17,7 +21,8 @@ class MessagesController < ApplicationController
       telegram_crossposting(@message.content)
       redirect_to root_path
     else
-      render new_message_path, object: @message
+      redirect_to root_path
+      flash[:notice] =  " Message invalid: #{@message.errors["content"][0]}"
     end
     
   end
